@@ -1,18 +1,24 @@
-/* ---------- Variables de marca ---------- */
+/* =========================================================
+   CH Tennis Academy – Mobile‑First, Fully Responsive Styles
+   ========================================================= */
+
+/* ---------- Brand variables ---------- */
 :root {
+  /* Colors */
   --c-dark: #061a36;
   --c-green: #c6f400;
   --c-green-d: #a7cf00;
   --c-gray: #f5f5f5;
   --c-white: #ffffff;
 
+  /* Misc */
   --radius: 14px;
   --shadow-s: 0 2px 6px rgba(0, 0, 0, 0.08);
   --shadow-m: 0 8px 24px rgba(0, 0, 0, 0.14);
   --max: 1180px;
 }
 
-/* ---------- Reset básico ---------- */
+/* ---------- Global reset ---------- */
 *,
 *::before,
 *::after {
@@ -51,7 +57,9 @@ ul {
   padding-inline: 1rem;
 }
 
-/* ---------- Header + Nav ---------- */
+/* =========================================================
+   Header & Navigation
+   ========================================================= */
 header {
   background: linear-gradient(
     135deg,
@@ -65,29 +73,36 @@ header {
 
 .nav {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 0;
+  flex-direction: column;            /* ← mobile first */
+  align-items: flex-start;
+  gap: 1rem;
+  padding-block: 1rem;
   position: relative;
   z-index: 90;
 }
 
+/* Logo */
 .nav__logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 700;
+  font-size: 1.1rem;
 }
 
-.nav__logo img {
-  width: 28px;
+.logo-img {
+  width: 44px;  /* balanced size for mobile */
+  height: auto;
 }
 
+/* Links */
 .nav__links {
   display: flex;
-  gap: 1.8rem;
+  flex-direction: column;            /* stack vertically on mobile */
+  gap: 0.75rem;
   font-size: 0.95rem;
   font-weight: 600;
+  width: 100%;
 }
 
 .nav__links a {
@@ -100,11 +115,13 @@ header {
   opacity: 1;
 }
 
+/* CTA button */
 .nav__cta {
+  align-self: stretch;               /* full‑width on mobile */
   background: var(--c-green);
   border: none;
   border-radius: 0.45rem;
-  padding: 0.55rem 1.15rem;
+  padding: 0.65rem 1.15rem;
   font-weight: 700;
   color: var(--c-dark);
   cursor: pointer;
@@ -115,25 +132,47 @@ header {
   background: var(--c-green-d);
 }
 
-/* ---------- Hero ---------- */
+/* ≥640px – Navigation inline */
+@media (min-width: 640px) {
+  .nav {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav__links {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    gap: 1.25rem;
+  }
+
+  .nav__cta {
+    align-self: center;
+  }
+}
+
+/* =========================================================
+   Hero
+   ========================================================= */
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-block: 4.5rem 5rem;
+  padding-block: 3.5rem 4.5rem;
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 5.2vw, 3.5rem);
+  font-size: clamp(2rem, 7vw, 3.5rem);
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 1rem;
 }
 
 .hero p.lead {
-  font-size: 1.125rem;
+  font-size: 1rem;
   margin-bottom: 2rem;
+  max-width: 34ch;
 }
 
 .btn-primary {
@@ -152,51 +191,76 @@ header {
   background: var(--c-green-d);
 }
 
-/* ---------- Hero cards ---------- */
+/* Hero cards */
 .hero-cards {
   display: grid;
-  gap: 1.5rem;
-  margin-top: 4rem;
+  gap: 1.25rem;
+  margin-top: 3rem;
   width: 100%;
-  max-width: var(--max);
 }
 
+.card {
+  background: var(--c-white);
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-s);
+  text-align: left;
+}
+
+.card h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+}
+
+/* ≥500px – two columns */
+@media (min-width: 500px) {
+  .hero-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ≥900px – three columns */
 @media (min-width: 900px) {
   .hero-cards {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.card {
-  background: var(--c-white);
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-s);
-}
-
-.card h3 {
-  margin-bottom: 0.7rem;
-  font-size: 1.15rem;
-}
-
-/* ---------- Secciones genéricas ---------- */
+/* =========================================================
+   Generic section styles
+   ========================================================= */
 section {
-  padding-block: 4rem;
+  padding-block: 3.5rem;
 }
 
 section h2 {
-  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-size: clamp(1.5rem, 5vw, 2.3rem);
   text-align: center;
   color: #0d4f96;
-  margin-bottom: 2.2rem;
+  margin-bottom: 2rem;
 }
 
-/* ---------- Programas ---------- */
+/* =========================================================
+   Programs
+   ========================================================= */
 .grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
+/* Mobile: 1 column */
+.grid-4 {
+  grid-template-columns: 1fr;
+}
+
+/* ≥600px – 2 columns */
+@media (min-width: 600px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ≥800px – 4 columns */
 @media (min-width: 800px) {
   .grid-4 {
     grid-template-columns: repeat(4, 1fr);
@@ -205,23 +269,25 @@ section h2 {
 
 .program-item {
   background: var(--c-white);
-  padding: 1.8rem;
+  padding: 1.6rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow-s);
   text-align: center;
 }
 
 .program-item h4 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   color: var(--c-dark);
 }
 
-/* ---------- Galería ---------- */
+/* =========================================================
+   Gallery
+   ========================================================= */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.2rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* smaller thumb on mobile */
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .gallery button {
@@ -243,12 +309,14 @@ section h2 {
   filter: brightness(1.1);
 }
 
-/* ---------- Contacto ---------- */
+/* =========================================================
+   Contact form
+   ========================================================= */
 .contact-form {
   display: grid;
   gap: 1rem;
   background: var(--c-white);
-  padding: 2rem;
+  padding: 1.75rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow-s);
 }
@@ -256,13 +324,16 @@ section h2 {
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.7rem;
   border: 1px solid #ddd;
   border-radius: 0.4rem;
   font-family: inherit;
+  font-size: 0.95rem;
 }
 
-/* ---------- Footer ---------- */
+/* =========================================================
+   Footer
+   ========================================================= */
 footer {
   background: var(--c-dark);
   color: var(--c-white);
@@ -271,7 +342,9 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ---------- Lightbox ---------- */
+/* =========================================================
+   Lightbox overlay
+   ========================================================= */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -288,9 +361,3 @@ footer {
   border-radius: var(--radius);
   box-shadow: var(--shadow-m);
 }
-
-.logo-img {
-  width: 195px; /* original: 65px × 3 */
-  height: auto;
-}
-
